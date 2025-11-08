@@ -1,0 +1,224 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>School Equipment Lending Portal</title>
+        <!-- Link to our new stylesheet -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <!-- Header (Logout Button) -->
+            <div class="header">
+                <h1>School Equipment Lending Portal</h1>
+                <button class="btn btn-danger" id="logout-button" style="display:none;">Logout</button>
+            </div>
+
+            <!-- Global Message Bar -->
+            <div id="global-message"></div>
+
+            <!-- 
+            "PAGES" START HERE 
+            We just show/hide these main divs.
+            -->
+
+            <!-- 1. AUTH PAGE (Login / Register) -->
+            <div id="auth-container">
+                <div class="auth-forms">
+                    <!-- Login Form -->
+                    <div class="auth-card" id="login-card">
+                        <h2>Login</h2>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-username">Username</label>
+                                <input type="text" id="login-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" required>
+                            </div>
+                            <button type="submit" class="btn">Login</button>
+                        </form>
+                        <p class="auth-toggle-link" id="show-register">Don't have an account? Sign Up</p>
+                    </div>
+                    
+                    <!-- Register Form -->
+                    <div class="auth-card" id="register-card" style="display:none;">
+                        <h2>Register</h2>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="reg-username">Username</label>
+                                <input type="text" id="reg-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-password">Password</label>
+                                <input type="password" id="reg-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-role">Role</label>
+                                <select id="reg-role">
+                                    <option value="student">Student</option>
+                                    <option value="staff">Staff</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn">Register</button>
+                        </form>
+                        <p class="auth-toggle-link" id="show-login">Already have an account? Log In</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. STUDENT DASHBOARD -->
+            <div id="student-dashboard">
+                <!-- Section 1: Available Equipment -->
+                <div class="dashboard-section">
+                    <h2>Available Equipment</h2>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Available</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="equipment-list-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Section 2: My Requests -->
+                <div class="dashboard-section">
+                    <h2>My Borrowing History</h2>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Req. ID</th>
+                                <th>Eq. ID</th>
+                                <th>Status</th>
+                                <th>Return Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="my-requests-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. ADMIN DASHBOARD -->
+            <div id="admin-dashboard">
+                <h2>Admin Dashboard</h2>
+                
+                <!-- Admin Tab Navigation -->
+                <div class="admin-tabs">
+                    <div class="admin-tab active" data-tab="pending">Pending Requests</div>
+                    <div class="admin-tab" data-tab="equipment">Manage Equipment</div>
+                    <div class="admin-tab" data-tab="reports">Reports & Logs</div>
+                </div>
+
+                <!-- Tab Content 1: Pending Requests -->
+                <div class="admin-tab-content active" id="tab-pending">
+                    <h3>Pending Requests</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Req. ID</th>
+                                <th>User ID</th>
+                                <th>Eq. ID</th>
+                                <th>Requested Return</th>
+                                <th>Set Return Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-pending-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tab Content 2: Manage Equipment -->
+                <div class="admin-tab-content" id="tab-equipment">
+                    <h3>Add New Equipment</h3>
+                    <form id="add-equipment-form" class="add-equipment-form">
+                        <div class="form-group">
+                            <label for="add-name">Name</label>
+                            <input type="text" id="add-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-category">Category</label>
+                            <input type="text" id="add-category" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-quantity">Quantity</label>
+                            <input type="number" id="add-quantity" min="1" value="1" required>
+                        </div>
+                        <button type="submit" class="btn">Add Item</button>
+                    </form>
+
+                    <h3 style="margin-top: 20px;">Full Inventory</h3>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Available / Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-inventory-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tab Content 3: Reports & Logs -->
+                <div class="admin-tab-content" id="tab-reports">
+                    <h3>Reports</h3>
+                    <button class="btn btn-danger" id="check-overdue-btn">Run Overdue Items Check</button>
+                    
+                    <h4 style="margin-top: 20px;">Overdue Items</h4>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Req. ID</th><th>User ID</th><th>Eq. ID</th><th>Status</th></tr>
+                        </thead>
+                        <tbody id="overdue-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+                    
+                    <h4 style="margin-top: 20px;">Damage/Repair Log</h4>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Repair ID</th><th>Eq. ID</th><th>Description</th><th>Status</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="repairs-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+
+                    <h4 style="margin-top: 20px;">Usage Analytics</h4>
+                    <table class="styled-table">
+                        <thead>
+                            <tr><th>Eq. ID</th><th>Name</th><th>Request Count</th></tr>
+                        </thead>
+                        <tbody id="analytics-tbody">
+                            <!-- JS will fill this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Link to our new JavaScript file -->
+        <!-- 'defer' tells the browser to wait until the HTML is loaded to run the script -->
+        <script src="app.js" defer></script>
+    </body>
+    </html>
